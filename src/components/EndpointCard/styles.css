@@ -1,0 +1,55 @@
+.sample-container {
+  background: #1b1b1b;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.sample-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #2d2d2d;
+}
+
+.sample-header button {
+  padding: 5px 15px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.sample-header button.active {
+  background: #fff;
+  color: #000;
+}
+
+.sample-header button.success {
+  background: #28a745;
+  color: #fff;
+}
+
+.sample-header button.error {
+  background: #dc3545;
+  color: #fff;
+}
+
+.content-type {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.content-type span {
+  display: block;
+  color: #fff;
+}
+
+.sample-code {
+  padding: 15px;
+  margin: 0;
+  color: #fff;
+  overflow-x: auto;
+}
+
+.sample-code code {
+  font-family: monospace;
+} 

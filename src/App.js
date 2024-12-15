@@ -4,9 +4,9 @@ import { ThemeProvider } from '@mui/material';
 import { theme } from './theme/theme';
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home';
-import Authentication from './pages/Authentication';
-import Orders from './pages/Orders';
-import Withdrawals from './pages/Withdrawals';
+import PaymentOperations1 from './components/PaymentOperations1';
+import PaymentOperations2 from './components/PaymentOperations2';
+
 
 function App() {
   return (
@@ -15,9 +15,8 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/authentication" element={<Authentication />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/withdrawals" element={<Withdrawals />} />
+            <Route path="/payment-operations-1" element={<PaymentOperations1 />} />
+            <Route path="/payment-operations-2" element={<PaymentOperations2 />} />
           </Routes>
         </Layout>
       </BrowserRouter>
