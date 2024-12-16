@@ -1,0 +1,37 @@
+replicaCount: 1
+
+image:
+  repository: 850995544720.dkr.ecr.eu-central-1.amazonaws.com/apidoc-fe
+  tag: latest
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: true
+  host: apidocs.mrogo.net
+  tlsSecretName: mrogo-test-tls-secret
+  sslRedirect: true
+
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "256Mi"
+    cpu: "250m"
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 75
+
+secretManager:
+  enabled: false
+  secretName: mrogo-fe-test-secret
+  roleArn: arn:aws:iam::850995544720:role/EKS-Shared-Secret-Access-Role
+  serviceAccountName: mrogo-fe-test-service-account
