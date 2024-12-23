@@ -11,7 +11,8 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow,
+  useMediaQuery
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -24,6 +25,7 @@ const EndpointCard = ({ endpoint, section }) => {
   // eslint-disable-next-line
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [selectedLanguage, setSelectedLanguage] = useState('javascript');
+  const [responseData, setResponseData] = useState(null);
 
   const handleSuccessResponse = () => {
     if (endpoint.path === '/login') {
@@ -183,6 +185,39 @@ const EndpointCard = ({ endpoint, section }) => {
     } else {
       handleErrorResponse();
     }
+    if (endpoint.path === '/withdrawal-save') {
+      if (status === '200') {
+        setResponseData({
+          status: true,
+          result: "Withdrawal successfully saved",
+          id: 123,
+        });
+      } else if (status === '400') {
+        setResponseData({
+          status: false,
+          error: "Missing parameters: sender_name, card_no",
+        });
+      }
+    } else if (endpoint.path === '/withdrawal-status/:transaction_id') {
+      if (status === '200') {
+        setResponseData({
+          status: true,
+          id: 123,
+          transaction_id: "789456",
+          transaction_status: "Completed",
+          amount_received: 1000,
+          comment: "Withdrawal processed",
+          result: "Success"
+        });
+      } else if (status === '400') {
+        setResponseData({
+          status: false,
+          error: "Invalid transaction ID",
+        });
+      }
+    } else {
+      setResponseData(null);
+    }
   };
 
   const handleCopy = (text) => {
@@ -242,7 +277,7 @@ const EndpointCard = ({ endpoint, section }) => {
   const urlExamples = {
     javascript: `const url = "https://pay-test.mrogo.net/TR123456?amount=100.50&type=order";
 fetch(url, {
-  method: 'GET',
+  method: 'POST',
   headers: {
     'Authorization': 'Bearer your-token-here'
   }
@@ -271,6 +306,8 @@ axios.get(url, config)
   .then(response => console.log(response.data))
   .catch(error => console.error(error));`
   };
+
+  const isMobile = useMediaQuery('(max-width:600px)'); // Check if the screen is mobile
 
   // If this is the main/intro section, render the welcome content
   if (section === 'intro') {
@@ -306,12 +343,21 @@ axios.get(url, config)
             Üye işyeri uygulamaları ve Mrogo Ödeme Sistemi arasındaki entegrasyonun kapsamı, ödeme toplama servisi entegrasyon gereksinimi için fonksiyonel gereksinimlerdir.
           </Typography>
         </Box>
+
+        <Box sx={{ mb: 6 }}>
+          <Typography variant="h4" sx={{ mb: 2 }}>
+            Withdrawal Reports
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 3 }}>
+            This section provides insights and details regarding withdrawal transactions.
+          </Typography>
+        </Box>
       </Box>
     );
   }
 
   return (
-    <Box sx={{ display: 'flex', gap: 4, mb: 6 }}>
+    <Box sx={{ display: 'flex', gap: 4, mb: 6, flexDirection: isMobile ? 'column' : 'row' }}>
       {/* Sol taraf - API Detayları */}
       <Box sx={{ flex: 1 }}>
         {endpoint.path === '/login' && (
@@ -1292,6 +1338,15 @@ axios.get(url, config)
             </pre>
           </Paper>
         </Box>
+
+        {/* Displaying the response data */}
+        {responseData && (
+          <Box sx={{ bgcolor: '#1b1b1b', p: 2, mt: 2 }}>
+            <pre style={{ color: '#fff' }}>
+              {JSON.stringify(responseData, null, 2)}
+            </pre>
+          </Box>
+        )}
       </Box>
     </Box>
   );

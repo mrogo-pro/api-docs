@@ -52,4 +52,53 @@
 
 .sample-code code {
   font-family: monospace;
-} 
+}
+
+/* Genel stil ayarları */
+.container {
+    display: flex;
+    flex-direction: row; /* Yatay hizalama */
+}
+
+/* Mobil cihazlar için stil ayarları */
+@media (max-width: 600px) {
+    .sidebar {
+        width: 100%; /* Yan menüyü tam genişlik yap */
+        position: fixed; /* Sabit pozisyon */
+        top: 0; /* Üstten başla */
+        left: 0; /* Soldan başla */
+        height: 100%; /* Tam yükseklik */
+        overflow-y: auto; /* Dikey kaydırma çubuğu ekle */
+        z-index: 1000; /* Üstte görünmesi için z-index ayarla */
+    }
+    .content {
+        margin-left: 0; /* Yan menü kapandığında içerik alanını sola kaydır */
+        padding: 10px; /* İçerik alanının kenar boşluklarını ayarla */
+        font-size: 14px; /* Yazı boyutunu küçült */
+    }
+}
+
+/* Tabletler için stil ayarları */
+@media (min-width: 601px) and (max-width: 900px) {
+    .sidebar {
+        width: 250px; /* Yan menü genişliği */
+        position: relative; /* Pozisyonu ayarla */
+    }
+    .content {
+        padding: 20px; /* İçerik alanının kenar boşluklarını ayarla */
+        font-size: 16px; /* Yazı boyutunu ayarla */
+        margin-left: 250px; /* Yan menü genişliğine göre içerik alanını kaydır */
+    }
+}
+
+/* Daha büyük ekranlar için stil ayarları */
+@media (min-width: 901px) {
+    .sidebar {
+        width: 300px; /* Yan menü genişliği */
+    }
+    .content {
+        padding: 30px; /* İçerik alanının kenar boşluklarını ayarla */
+        font-size: 18px; /* Yazı boyutunu ayarla */
+        margin-left: 300px; /* Yan menü genişliğine göre içerik alanını kaydır */
+    }
+}

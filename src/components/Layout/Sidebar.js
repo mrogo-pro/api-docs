@@ -9,10 +9,13 @@ import {
   Typography,
   Box,
   Divider,
+  IconButton,
+  useMediaQuery,
 } from '@mui/material';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const drawerWidth = 280;
 
@@ -78,6 +81,8 @@ const Sidebar = () => {
   const location = useLocation();
   const [activeSection, setActiveSection] = useState('');
   const [openMerchantInfo, setOpenMerchantInfo] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const isMobile = useMediaQuery('(max-width:600px)');
 
   useEffect(() => {
     if (location.pathname === '/payment-operations-1') {
@@ -208,140 +213,156 @@ const Sidebar = () => {
     setOpenMerchantInfo(!openMerchantInfo);
   };
 
+  const handleToggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <Drawer
-      variant="permanent"
-      sx={{ 
-        width: drawerWidth,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
+    <>
+      <IconButton 
+        onClick={handleToggleSidebar} 
+        sx={{ position: 'fixed', bottom: 16, right: 16, zIndex: 1200 }}
+      >
+        <MenuIcon />
+      </IconButton>
+      <Drawer
+        variant={isMobile ? "temporary" : "permanent"}
+        open={isSidebarOpen}
+        onClose={handleToggleSidebar}
+        sx={{ 
           width: drawerWidth,
-          boxSizing: 'border-box',
-          mt: '64px',
-          height: 'calc(100% - 64px)',
-          zIndex: 1100,
-          overflowY: 'auto'
-        },
-      }}
-    >
-      <Box sx={{ 
-        position: 'sticky',
-        top: 0,
-        backgroundColor: 'background.paper',
-        zIndex: 1,
-        p: 2 
-      }}>
-        <Typography 
-          variant="h6" 
-          sx={{ 
-            color: 'primary.main',
-            cursor: 'pointer'
-          }}
-          onClick={() => handleNavigation('/')}
-        >
-          API Documentation
-        </Typography>
-      </Box>
-      
-      {menuSections.map((section, index) => (
-        <React.Fragment key={index}>
-          <Typography
-            variant="overline"
+          minWidth: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            minWidth: drawerWidth,
+            boxSizing: 'border-box',
+            mt: '64px',
+            height: 'calc(100% - 64px)',
+            zIndex: 1100,
+            overflowY: 'auto'
+          },
+        }}
+      >
+        <Box sx={{ 
+          position: 'sticky',
+          top: 0,
+          backgroundColor: 'background.paper',
+          zIndex: 1,
+          p: 2 
+        }}>
+          <Typography 
+            variant="h6" 
             sx={{ 
-              px: 2, 
-              py: 1, 
-              display: 'block', 
-              color: 'text.secondary',
-              position: 'sticky',
-              top: 64,
-              backgroundColor: 'background.paper',
-              zIndex: 1
+              color: 'primary.main',
+              cursor: 'pointer'
             }}
+            onClick={() => handleNavigation('/')}
           >
-            {section.title}
+            API Documentation
           </Typography>
-          <List>
-            {section.items.map((item) => (
-              <React.Fragment key={item.path}>
-                <ListItem disablePadding>
-                  <ListItemButton
-                    selected={
-                      item.path === '/' 
-                        ? activeSection === 'home'
-                        : activeSection === item.path.substring(1)
-                    }
-                    onClick={
-                      item.subItems 
-                        ? handleMerchantInfoClick 
-                        : () => handleNavigation(item.path, item.filter)
-                    }
-                    sx={{
-                      '&.Mui-selected': {
-                        backgroundColor: 'primary.main',
-                        color: 'white',
-                        '&:hover': {
-                          backgroundColor: 'primary.dark',
-                        },
-                      },
-                    }}
-                  >
-                    <ListItemText 
-                      primary={item.name}
+        </Box>
+        
+        {menuSections.map((section, index) => (
+          <React.Fragment key={index}>
+            <Typography
+              variant="overline"
+              sx={{ 
+                px: 2, 
+                py: 1, 
+                display: 'block', 
+                color: 'text.secondary',
+                position: 'sticky',
+                top: 64,
+                backgroundColor: 'background.paper',
+                zIndex: 1
+              }}
+            >
+              {section.title}
+            </Typography>
+            <List>
+              {section.items.map((item) => (
+                <React.Fragment key={item.path}>
+                  <ListItem disablePadding>
+                    <ListItemButton
+                      selected={
+                        item.path === '/' 
+                          ? activeSection === 'home'
+                          : activeSection === item.path.substring(1)
+                      }
+                      onClick={
+                        item.subItems 
+                          ? handleMerchantInfoClick 
+                          : () => handleNavigation(item.path, item.filter)
+                      }
                       sx={{
-                        '& .MuiTypography-root': {
-                          fontWeight: (item.path === '/' && activeSection === 'home') || 
-                                    activeSection === item.path.substring(1) 
-                            ? 'bold' 
-                            : 'normal',
-                        }
+                        '&.Mui-selected': {
+                          backgroundColor: 'primary.main',
+                          color: 'white',
+                          '&:hover': {
+                            backgroundColor: 'primary.dark',
+                          },
+                        },
                       }}
-                    />
-                    {item.subItems && (
-                      openMerchantInfo ? <ExpandLess /> : <ExpandMore />
-                    )}
-                  </ListItemButton>
-                </ListItem>
-                {item.subItems && (
-                  <Collapse in={openMerchantInfo} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                      {item.subItems.map((subItem) => (
-                        <ListItemButton
-                          key={subItem.path}
-                          selected={activeSection === subItem.path.substring(1)}
-                          onClick={() => handleNavigation(subItem.path)}
-                          sx={{
-                            pl: 4,
-                            '&.Mui-selected': {
-                              backgroundColor: 'primary.main',
-                              color: 'white',
-                              '&:hover': {
-                                backgroundColor: 'primary.dark',
-                              },
-                            },
-                          }}
-                        >
-                          <ListItemText 
-                            primary={subItem.name}
+                    >
+                      <ListItemText 
+                        primary={item.name}
+                        sx={{
+                          '& .MuiTypography-root': {
+                            fontWeight: (item.path === '/' && activeSection === 'home') || 
+                                      activeSection === item.path.substring(1) 
+                                ? 'bold' 
+                                : 'normal',
+                          }
+                        }}
+                      />
+                      {item.subItems && (
+                        openMerchantInfo ? <ExpandLess /> : <ExpandMore />
+                      )}
+                    </ListItemButton>
+                  </ListItem>
+                  {item.subItems && (
+                    <Collapse in={openMerchantInfo} timeout="auto" unmountOnExit>
+                      <List component="div" disablePadding>
+                        {item.subItems.map((subItem) => (
+                          <ListItemButton
+                            key={subItem.path}
+                            selected={activeSection === subItem.path.substring(1)}
+                            onClick={() => handleNavigation(subItem.path)}
                             sx={{
-                              '& .MuiTypography-root': {
-                                fontWeight: activeSection === subItem.path.substring(1)
-                                  ? 'bold'
-                                  : 'normal',
-                              }
+                              pl: 4,
+                              '&.Mui-selected': {
+                                backgroundColor: 'primary.main',
+                                color: 'white',
+                                '&:hover': {
+                                  backgroundColor: 'primary.dark',
+                                },
+                              },
                             }}
-                          />
-                        </ListItemButton>
-                      ))}
-                    </List>
-                  </Collapse>
-                )}
-              </React.Fragment>
-            ))}
-          </List>
-          <Divider sx={{ my: 1 }} />
-        </React.Fragment>
-      ))}
-    </Drawer>
+                          >
+                            <ListItemText 
+                              primary={subItem.name}
+                              sx={{
+                                '& .MuiTypography-root': {
+                                  fontWeight: activeSection === subItem.path.substring(1)
+                                    ? 'bold'
+                                    : 'normal',
+                                }
+                              }}
+                            />
+                          </ListItemButton>
+                        ))}
+                      </List>
+                    </Collapse>
+                  )}
+                </React.Fragment>
+              ))}
+            </List>
+            <Divider sx={{ my: 1 }} />
+          </React.Fragment>
+        ))}
+      </Drawer>
+    </>
   );
 };
 
