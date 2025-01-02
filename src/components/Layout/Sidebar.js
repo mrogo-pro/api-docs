@@ -16,8 +16,10 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 const drawerWidth = 280;
+const drawerCollapsedWidth = 80;
 
 const menuSections = [
   {
@@ -82,6 +84,7 @@ const Sidebar = () => {
   const [activeSection, setActiveSection] = useState('');
   const [openMerchantInfo, setOpenMerchantInfo] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const isMobile = useMediaQuery('(max-width:600px)');
 
   useEffect(() => {
@@ -217,11 +220,15 @@ const Sidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const handleCollapseSidebar = () => {
+    setIsSidebarCollapsed(!isSidebarCollapsed);
+  };
+
   return (
     <>
       <IconButton 
         onClick={handleToggleSidebar} 
-        sx={{ position: 'fixed', bottom: 16, right: 16, zIndex: 1200 }}
+        sx={{ position: 'fixed', bottom: 16, right: 16, zIndex: 1200, display: isMobile ? 'block' : 'none' }}
       >
         <MenuIcon />
       </IconButton>
@@ -230,12 +237,12 @@ const Sidebar = () => {
         open={isSidebarOpen}
         onClose={handleToggleSidebar}
         sx={{ 
-          width: drawerWidth,
-          minWidth: drawerWidth,
+          width: isSidebarCollapsed ? drawerCollapsedWidth : drawerWidth,
+          minWidth: isSidebarCollapsed ? drawerCollapsedWidth : drawerWidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            minWidth: drawerWidth,
+            width: isSidebarCollapsed ? drawerCollapsedWidth : drawerWidth,
+            minWidth: isSidebarCollapsed ? drawerCollapsedWidth : drawerWidth,
             boxSizing: 'border-box',
             mt: '64px',
             height: 'calc(100% - 64px)',
@@ -261,6 +268,9 @@ const Sidebar = () => {
           >
             API Documentation
           </Typography>
+          <IconButton onClick={handleCollapseSidebar} sx={{ position: 'absolute', right: 8, top: 8 }}>
+            <ChevronLeftIcon />
+          </IconButton>
         </Box>
         
         {menuSections.map((section, index) => (

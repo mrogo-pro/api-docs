@@ -1,7 +1,13 @@
+/* Temel container yapısı */
 .sample-container {
   background: #1b1b1b;
   border-radius: 4px;
+  max-width: 100%;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
   margin-top: 10px;
+  overflow-wrap: break-word; /* Uzun metinlerin taşmasını önler */
 }
 
 .sample-header {
@@ -9,6 +15,7 @@
   justify-content: space-between;
   padding: 10px;
   border-bottom: 1px solid #2d2d2d;
+  flex-wrap: wrap; /* Taşmayı önlemek için esnek hizalama */
 }
 
 .sample-header button {
@@ -36,6 +43,7 @@
 .content-type {
   color: #6c757d;
   font-size: 14px;
+  overflow-wrap: break-word; /* Uzun kelimeleri böler */
 }
 
 .content-type span {
@@ -47,58 +55,137 @@
   padding: 15px;
   margin: 0;
   color: #fff;
-  overflow-x: auto;
-}
-
-.sample-code code {
-  font-family: monospace;
+  overflow-x: auto; /* Yatay kaydırma çubuğu ekle */
+  white-space: nowrap; /* Satır taşmasını önle */
+  max-width: 100%; /* Genişliği %100 yap */
+  background-color: #34495e; /* Arka plan rengi */
+  border-radius: 4px; /* Kenar yuvarlama */
 }
 
 /* Genel stil ayarları */
-.container {
-    display: flex;
-    flex-direction: row; /* Yatay hizalama */
+.content {
+  max-width: 700px; /* Okunabilirliği artırmak için maksimum genişlik */
+  margin: 0 auto; /* Ortalamak için */
+  padding: 20px; /* Kenar boşlukları */
+  text-align: justify; /* Metni iki yana yasla */
+  overflow-wrap: break-word; /* Uzun kelimelerin taşmasını önler */
+  box-sizing: border-box; /* Padding dahil genişliği sınırla */
 }
+
 
 /* Mobil cihazlar için stil ayarları */
 @media (max-width: 600px) {
-    .sidebar {
-        width: 100%; /* Yan menüyü tam genişlik yap */
-        position: fixed; /* Sabit pozisyon */
-        top: 0; /* Üstten başla */
-        left: 0; /* Soldan başla */
-        height: 100%; /* Tam yükseklik */
-        overflow-y: auto; /* Dikey kaydırma çubuğu ekle */
-        z-index: 1000; /* Üstte görünmesi için z-index ayarla */
-    }
-    .content {
-        margin-left: 0; /* Yan menü kapandığında içerik alanını sola kaydır */
-        padding: 10px; /* İçerik alanının kenar boşluklarını ayarla */
-        font-size: 14px; /* Yazı boyutunu küçült */
-    }
+  h1, h2, h3, p {
+      font-size: 5vw; /* Ekran genişliğine göre yazı boyutu */
+      line-height: 1.6; /* Daha fazla boşluk */
+      padding: 0 10px; /* Kenarlardan boşluk bırak */
+  }
+
+  .content {
+      padding: 15px; /* Mobil için içeriğe daha fazla boşluk */
+      font-size: 0.95rem; /* Yazı boyutunu artır */
+      text-align: left; /* Okunabilirliği artırmak için sola hizala */
+  }
 }
+
+    .sample-container {
+        padding: 10px; /* Kenar boşluklarını azalt */
+    }
+
+    table {
+        font-size: 0.75rem; /* Tablo yazı boyutunu küçült */
+    }
+
+    th, td {
+        padding: 5px; /* Hücre içi boşlukları daralt */
+    }
+
 
 /* Tabletler için stil ayarları */
 @media (min-width: 601px) and (max-width: 900px) {
     .sidebar {
-        width: 250px; /* Yan menü genişliği */
-        position: relative; /* Pozisyonu ayarla */
+        width: 250px;
+        position: relative;
     }
+
     .content {
-        padding: 20px; /* İçerik alanının kenar boşluklarını ayarla */
-        font-size: 16px; /* Yazı boyutunu ayarla */
-        margin-left: 250px; /* Yan menü genişliğine göre içerik alanını kaydır */
+        padding: 20px;
+        font-size: 16px;
+        margin-left: 250px;
+        text-align: left;
+        word-wrap: break-word; /* Taşmayı önler */
+    }
+
+    h1, h2, h3, p {
+        font-size: 1.1rem; /* Tablet için uygun boyut */
+        line-height: 1.5;
     }
 }
 
 /* Daha büyük ekranlar için stil ayarları */
 @media (min-width: 901px) {
     .sidebar {
-        width: 300px; /* Yan menü genişliği */
+        width: 300px;
     }
+
     .content {
-        padding: 30px; /* İçerik alanının kenar boşluklarını ayarla */
-        font-size: 18px; /* Yazı boyutunu ayarla */
-        margin-left: 300px; /* Yan menü genişliğine göre içerik alanını kaydır */
+        padding: 30px;
+        font-size: 18px;
+        margin-left: 300px;
+        text-align: left;
+        word-wrap: break-word;
     }
+
+    h1, h2, h3, p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+}
+
+/* Başlık ve paragraf düzenlemeleri */
+h1, h2, h3, h4, p, .content-type {
+  max-width: 100%;
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0 0 10px 0;
+  padding: 0 15px;
+  overflow-wrap: break-word;
+  box-sizing: border-box; /* Uzun metinlerin taşmasını önler */
+}
+
+/* Ekstra stil ayarları */
+.content {
+    padding: 20px; /* İçerik alanı için padding */
+    margin: 0 auto; /* Ortalamak için */
+    max-width: 800px; /* Maksimum genişlik ayarı */
+    text-align: justify; /* Metni iki yana yasla */
+    width: 100%; /* Genişliği %100 yap */
+    overflow: auto; /* Taşmayı önle, kaydırma çubuğu ekle */
+    box-sizing: border-box; /* Padding ve border'ı genişliğe dahil et */
+}
+
+/* Tablo stil ayarları */
+table {
+    width: 100%; /* Tablonun tam genişlikte olmasını sağlar */
+    border-collapse: collapse; /* Kenar boşluklarını kaldırır */
+}
+
+th, td {
+    padding: 10px; /* Hücre içi boşluk */
+    text-align: left; /* Metin hizalaması */
+    border-bottom: 1px solid #444; /* Alt kenar çizgisi */
+}
+
+th {
+    background-color: #2d2d2d; /* Başlık hücreleri için arka plan rengi */
+    color: #fff; /* Başlık metni rengi */
+}
+
+/* Daha spesifik seçiciler kullanarak stil tanımları */
+.container .content {
+    padding: 20px; /* İçerik alanı için padding */
+    margin: 0 auto; /* Ortalamak için */
+    max-width: 800px; /* Maksimum genişlik ayarı */
+    text-align: justify; /* Metni iki yana yasla */
 }
