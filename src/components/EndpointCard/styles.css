@@ -64,12 +64,12 @@
 
 /* Genel stil ayarları */
 .content {
-  max-width: 700px; /* Okunabilirliği artırmak için maksimum genişlik */
-  margin: 0 auto; /* Ortalamak için */
-  padding: 20px; /* Kenar boşlukları */
-  text-align: justify; /* Metni iki yana yasla */
-  overflow-wrap: break-word; /* Uzun kelimelerin taşmasını önler */
-  box-sizing: border-box; /* Padding dahil genişliği sınırla */
+    max-width: 700px; /* Okunabilirliği artırmak için maksimum genişlik */
+    margin: 0 auto; /* Ortalamak için */
+    padding: 20px; /* Kenar boşlukları */
+    text-align: justify; /* Metni iki yana yasla */
+    overflow-wrap: break-word; /* Uzun kelimelerin taşmasını önler */
+    box-sizing: border-box; /* Padding dahil genişliği sınırla */
 }
 
 
