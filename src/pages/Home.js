@@ -153,6 +153,82 @@ const Home = () => {
               section="orders"
             />
           ))}
+
+          <Box sx={{ p: 2 }}>
+            <Typography variant="h6" sx={{ mb: 2 }}>
+            Comment Descriptions
+            </Typography>
+            <TableContainer component={Paper} sx={{ bgcolor: '#f5f5f5' }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={{ fontWeight: 'bold' }}>Status</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold' }}>Description</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Əməliyyat xətası</TableCell>
+                    <TableCell>An error occurred during processing.</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>SMS göndərilmədi</TableCell>
+                    <TableCell>SMS not delivered, please check.</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Uğurla tamamlandı</TableCell>
+                    <TableCell>is the confirmation message</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Səhv şifrə</TableCell>
+                    <TableCell>The password entered is incorrect.</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Kart nömrəsi yanlışdır</TableCell>
+                    <TableCell>Card number entered is incorrect.</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>BIN tapılmadı</TableCell>
+                    <TableCell>Card BIN number not found.</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
+
+          <Box sx={{ p: 2 }}>
+            <Typography variant="h6" sx={{ mb: 2 }}>
+            Transaction_Status Descriptions
+            </Typography>
+            <TableContainer component={Paper} sx={{ bgcolor: '#f5f5f5' }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={{ fontWeight: 'bold' }}>Status</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold' }}>Description</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>waiting for sms</TableCell>
+                    <TableCell>Waiting for SMS.</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>finished</TableCell>
+                    <TableCell>Process completed.</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>processing</TableCell>
+                    <TableCell>The process is in progress.</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>sms received</TableCell>
+                    <TableCell>SMS received.</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
         </section>
 
         <section id="withdrawals" style={{ marginBottom: '96px' }}>

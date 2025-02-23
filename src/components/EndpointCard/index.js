@@ -107,12 +107,12 @@ const EndpointCard = ({ endpoint, section }) => {
         status: 400,
         data: {
           errors: {
-            "400": "Bad Request - İstek formatı hatalı veya eksik parametreler var",
-            "401": "Unauthorized - Yetkilendirme başarısız",
-            "403": "Forbidden - Bu işlem için yetkiniz yok",
-            "404": "Not Found - İşlem bulunamadı",
-            "405": "Method Not Allowed - HTTP metodu desteklenmiyor",
-            "500": "Internal Server Error - Sunucu hatası"
+            "400": "Bad Request - Request format is invalid or missing parameters",
+            "401": "Unauthorized - Authorization failed",
+            "403": "Forbidden - You do not have permission for this operation",
+            "404": "Not Found - Operation not found",
+            "405": "Method Not Allowed - HTTP method is not supported",
+            "500": "Internal Server Error - Server error"
           }
         }
       });
@@ -122,13 +122,13 @@ const EndpointCard = ({ endpoint, section }) => {
         status: 400,
         data: {
           errors: {
-            "400": "Bad Request - İstek formatı hatalı veya eksik parametreler var",
-            "401": "Unauthorized - Yetkilendirme başarısız",
-            "403": "Forbidden - Bu işlem için yetkiniz yok",
-            "404": "Not Found - İşlem bulunamadı",
-            "405": "Method Not Allowed - HTTP metodu desteklenmiyor",
-            "409": "Conflict - Bu transaction_id ile daha önce işlem oluşturulmuş",
-            "500": "Internal Server Error - Sunucu hatası"
+            "400": "Bad Request - Request format is invalid or missing parameters",
+            "401": "Unauthorized - Authorization failed",
+            "403": "Forbidden - You do not have permission for this operation",
+            "404": "Not Found - Operation not found",
+            "405": "Method Not Allowed - HTTP method is not supported",
+            "409": "Conflict - A transaction has already been created with this transaction_id",
+            "500": "Internal Server Error - Server error"
           }
         }
       });
@@ -138,11 +138,11 @@ const EndpointCard = ({ endpoint, section }) => {
         status: 400,
         data: {
           errors: {
-            "400": "Bad Request - İstek formatı hatalı veya eksik parametreler var",
-            "401": "Unauthorized - Yetkilendirme başarısız",
-            "403": "Forbidden - Bu işlem için yetkiniz yok",
-            "404": "Not Found - İşlem bulunamadı",
-            "500": "Internal Server Error - Sunucu hatası"
+            "400": "Bad Request - Request format is invalid or missing parameters",
+            "401": "Unauthorized - Authorization failed",
+            "403": "Forbidden - You do not have permission for this operation",
+            "404": "Not Found - Operation not found",
+            "500": "Internal Server Error - Server error"
           }
         }
       });
@@ -152,12 +152,12 @@ const EndpointCard = ({ endpoint, section }) => {
         status: 400,
         data: {
           errors: {
-            "400": "Bad Request - İstek formatı hatalı veya eksik parametreler var",
-            "401": "Unauthorized - Yetkilendirme başarısız",
-            "403": "Forbidden - Bu işlem için yetkiniz yok",
-            "404": "Not Found - Sipariş bulunamadı",
-            "405": "Method Not Allowed - HTTP metodu desteklenmiyor",
-            "500": "Internal Server Error - Sunucu hatası"
+            "400": "Bad Request - Request format is invalid or missing parameters",
+            "401": "Unauthorized - Authorization failed",
+            "403": "Forbidden - You do not have permission for this operation",
+            "404": "Not Found - Order not found",
+            "405": "Method Not Allowed - HTTP method is not supported",
+            "500": "Internal Server Error - Server error"
           }
         }
       });
@@ -167,11 +167,11 @@ const EndpointCard = ({ endpoint, section }) => {
         status: 400,
         data: {
           errors: {
-            "400": "Bad Request - İstek formatı hatalı veya eksik parametreler var",
-            "401": "Unauthorized - Yetkilendirme başarısız",
-            "403": "Forbidden - Bu işlem için yetkiniz yok",
-            "404": "Not Found - Sipariş durumu bulunamadı",
-            "500": "Internal Server Error - Sunucu hatası"
+            "400": "Bad Request - Request format is invalid or missing parameters",
+            "401": "Unauthorized - Authorization failed",
+            "403": "Forbidden - You do not have permission for this operation",
+            "404": "Not Found - Order status not found",
+            "500": "Internal Server Error - Server error"
           }
         }
       });
@@ -631,27 +631,27 @@ axios.get(url, config)
                   <TableRow>
                     <TableCell sx={{ color: '#6c757d' }}>status</TableCell>
                     <TableCell sx={{ color: '#6c757d' }}>boolean</TableCell>
-                    <TableCell sx={{ color: '#6c757d' }}>İşlem durumu</TableCell>
+                    <TableCell sx={{ color: '#6c757d' }}>Transaction status</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell sx={{ color: '#6c757d' }}>url</TableCell>
                     <TableCell sx={{ color: '#6c757d' }}>string</TableCell>
-                    <TableCell sx={{ color: '#6c757d' }}>Oluşturulan ödeme URL'i</TableCell>
+                    <TableCell sx={{ color: '#6c757d' }}>Generated payment URL</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell sx={{ color: '#6c757d' }}>transaction_id</TableCell>
                     <TableCell sx={{ color: '#6c757d' }}>string</TableCell>
-                    <TableCell sx={{ color: '#6c757d' }}>İşlem numarası</TableCell>
+                    <TableCell sx={{ color: '#6c757d' }}>Transaction number</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell sx={{ color: '#6c757d' }}>type</TableCell>
                     <TableCell sx={{ color: '#6c757d' }}>string</TableCell>
-                    <TableCell sx={{ color: '#6c757d' }}>İşlem tipi (order)</TableCell>
+                    <TableCell sx={{ color: '#6c757d' }}>Transaction type (order)</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell sx={{ color: '#6c757d' }}>token</TableCell>
                     <TableCell sx={{ color: '#6c757d' }}>string</TableCell>
-                    <TableCell sx={{ color: '#6c757d' }}>İşlem için oluşturulan token</TableCell>
+                    <TableCell sx={{ color: '#6c757d' }}>Token generated for the transaction</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
