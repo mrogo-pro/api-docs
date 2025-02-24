@@ -77,7 +77,7 @@ const EndpointCard = ({ endpoint, section }) => {
           transaction_id: "TR123456",
           transaction_status: "finished",
           amount_received: "100.50",
-          comment: "İşlem başarıyla tamamlandı",
+          comment: "The operation was completed successfully",
           result: "success"
         }
       });
